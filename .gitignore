@@ -41,3 +41,12 @@ target_wrapper.*
 
 # QtCreator CMake
 CMakeLists.txt.user*
+
+CMakeCache.txt
+cmake_install.cmake 
+Makefile
+move_robot
+CMakeFiles
+
+.vscode
+
