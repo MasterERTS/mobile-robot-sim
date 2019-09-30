@@ -5,7 +5,8 @@
 #include <envir.h>
 #include <robot.h>
 
-using std::endl;using std::cout;
+using std::cout;
+using std::endl;
 
 namespace arpro
 {
@@ -23,7 +24,7 @@ public:
         _robot.attach(this);
     }
 
-    inline static void setEnvironment(Environment &_envir) {envir_ = &_envir;}
+    inline static void setEnvironment(Environment &_envir) { envir_ = &_envir; }
 
     // update from current sensor pose
     virtual void update(const Pose &_p) = 0;
@@ -40,36 +41,34 @@ public:
     // correct twist in robot frame
     void correctRobotTwist(Twist &_v)
     {
-        cout << " Correction new sensor" << endl;
+        cout << " correction new sensor" << endl;
         cout << "     Base robot twist: " << _v << endl;
         // twist in sensor frame
         _v = _v.transformInverse(pose_);
         cout << "     Base sensor twist: " << _v << endl;
 
-        // check twist in sensor frame
+        // correct twist in sensor frame
         correctTwist(_v);
-        cout << "     Corrected sensor twist: " << _v << endl;
+        cout << "     corrected sensor twist: " << _v << endl;
 
         // back to robot frame
         _v = _v.transformDirect(pose_);
-        cout << "     Corrected robot twist: " << _v << endl;
+        cout << "     corrected robot twist: " << _v << endl;
     }
 
     // read current measurement
-    double read() {return s_;}
+    double read() { return s_; }
 
 protected:
     // current measurement
     double s_;
     // measurement history
     std::vector<double> s_history_;
-    static Environment* envir_;
+    static Environment *envir_;
     // pose in robot frame
     Pose pose_;
-    Robot* robot_;
+    Robot *robot_;
 };
-}
-
-
+} // namespace arpro
 
 #endif // SENSOR_H
