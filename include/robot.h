@@ -14,25 +14,22 @@ class Robot
 public:
     // initialize robot at (x,y,theta)
     Robot(std::string _name, double _x, double _y, double _theta);
-    void setSamplingTime(double dt)
-    {
-      dt_ = dt;
-    }
 
-    Pose pose() {return pose_;}
+    Pose pose() { return pose_; }
 
     // attach a sensor
     void attach(Sensor *_sensor)
     {
         sensors_.push_back(_sensor);
     }
-    
+    void initWheels(double b, double r, double wmax);
+
     // move robot with a given (x,y,theta) velocity
     void moveXYT(double _vx, double _vy, double _omega);
 
     // move robot with linear and angular velocities
     void moveVW(double _v, double _omega);
-        
+
     // move robot with given wheel velocity
     void rotateWheels(double _left, double _right);
 
@@ -41,31 +38,33 @@ public:
 
     //try to follow a local frame velocity with sensor constraints
     void moveWithSensor(Twist _twist);
-    
+
     // prints the current position
     void printPosition();
 
-    inline void getHistory(std::vector<double> &_x, std::vector<double> &_y) const
+    inline void getHistory(std::vector<double> &_x, std::vector<double> &_y)
     {
         _x = x_history_;
         _y = y_history_;
     }
 
-    inline std::string name() const {return name_;}
+    inline std::string name() { return name_; }
 
 protected:
     // position
     Pose pose_;
+    double r_, b_, wmax_;
+    bool wheels_init_;
     std::vector<double> x_history_, y_history_;
     std::string name_;
 
     // sampling time
-    double dt_ = 0.1;
+    double dt_;
 
     // sensors
-    std::vector<Sensor*> sensors_;
+    std::vector<Sensor *> sensors_;
 };
 
-}
+} // namespace arpro
 
 #endif
