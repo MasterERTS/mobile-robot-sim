@@ -7,42 +7,41 @@
 namespace arpro
 {
 
-
 class Robot;
 
 class Environment
 {
 
-    std::vector<Pose> walls;
-    Pose target_;
-    std::vector<double> x_hist, y_hist;
-    std::vector<Robot*> robots_;
+  std::vector<Pose> walls;
+  Pose target_;
+  std::vector<double> x_hist, y_hist;
+  std::vector<Robot *> robots_;
 
-    double dt = 0.1;
-    double t = 0;
+  double dt = 0.1;
+  double t = 0;
 
 public:
-    Environment();
+  Environment();
 
-    double time() const
-    {
-      return t;
-    }
+  double time() const
+  {
+    return t;
+  }
 
-    // the target draws a cardoid curve
-    void updateTarget();
+  // the target draws a cardoid curve
+  void updateTarget();
 
-    Pose target() const
-    {
-      return target_;
-    }
+  Pose target() const
+  {
+    return target_;
+  }
 
-    void addRobot(Robot &_robot);
+  void addRobot(Robot &_robot);
 
-    // plots the trajectory in the given environment
-    void plot();
+  // plots the trajectory in the given environment
+  void plot();
 };
 
-}
+} // namespace arpro
 
 #endif // ENVIR_H

@@ -24,11 +24,11 @@ Environment::Environment()
 // the target draws a cardoid curve
 void Environment::updateTarget()
 {
-  double c = -cos(0.05*t),
-      s = -sin(0.05*t);
+  double c = -cos(0.05 * t),
+         s = -sin(0.05 * t);
   double a = 6, b = 10;
-  target_.x = (a + b*c)*c+a+1-b;
-  target_.y = (a + b*c)*s;
+  target_.x = (a + b * c) * c + a + 1 - b;
+  target_.y = (a + b * c) * s;
 
   x_hist.push_back(target_.x);
   y_hist.push_back(target_.y);
@@ -38,12 +38,11 @@ void Environment::updateTarget()
 
 void Environment::addRobot(Robot &_robot)
 {
-  _robot.setSamplingTime(dt);
   robots_.push_back(&_robot);
 }
 
 void copyToCoord(std::vector<double> &coord, const std::vector<double> &src,
-                 uint & offset)
+                 uint &offset)
 {
   std::copy(src.begin(), src.end(), coord.begin() + offset);
   offset += src.size();
@@ -52,19 +51,17 @@ void copyToCoord(std::vector<double> &coord, const std::vector<double> &src,
 template <class T>
 void writeYAMLine(std::ofstream &out,
                   std::string key,
-                  const std::vector<T> &data
-                  )
+                  const std::vector<T> &data)
 {
   out << key << " [";
-  for(uint i = 0; i < data.size(); ++i)
+  for (uint i = 0; i < data.size(); ++i)
   {
     out << data[i];
-    if(i != data.size()-1)
+    if (i != data.size() - 1)
       out << ", ";
   }
   out << "]\n";
 }
-
 
 // plots the trajectory in the given environment
 void Environment::plot()
@@ -72,7 +69,7 @@ void Environment::plot()
   const uint size = x_hist.size();
   const uint n_traj = 1 + robots_.size();
 
-  const std::vector<std::string> colors{"m", "b","g","r","c"};
+  const std::vector<std::string> colors{"m", "b", "g", "r", "c"};
 
   std::vector<double> coord(size * n_traj * 2);
   std::vector<std::string> names(n_traj);
@@ -82,11 +79,11 @@ void Environment::plot()
   copyToCoord(coord, x_hist, offset);
   copyToCoord(coord, y_hist, offset);
 
-  uint n=1;
-  std::vector<double> x,y;
-  for(auto &robot: robots_)
+  uint n = 1;
+  std::vector<double> x, y;
+  for (auto &robot : robots_)
   {
-    robot->getHistory(x,y);
+    robot->getHistory(x, y);
     x.resize(size);
     y.resize(size);
     copyToCoord(coord, x, offset);
@@ -100,22 +97,22 @@ void Environment::plot()
   writeYAMLine(out, "colors:", colors);
 
   out << "data: \n";
-  std::vector<double> line(2*n_traj);
-  for(uint i = 0; i < size; ++i)
+  std::vector<double> line(2 * n_traj);
+  for (uint i = 0; i < size; ++i)
   {
-    for(uint robot = 0; robot< n_traj; robot++)
+    for (uint robot = 0; robot < n_traj; robot++)
     {
-      line[2*robot] = coord[2*robot*size + i];
-      line[2*robot+1] = coord[(2*robot+1)*size + i];
+      line[2 * robot] = coord[2 * robot * size + i];
+      line[2 * robot + 1] = coord[(2 * robot + 1) * size + i];
     }
     writeYAMLine(out, "    -", line);
   }
 
-  if(walls.size() > 0)
+  if (walls.size() > 0)
   {
     x.clear();
     y.clear();
-    for(auto &w: walls)
+    for (auto &w : walls)
     {
       x.push_back(w.x);
       y.push_back(w.y);
@@ -130,4 +127,4 @@ void Environment::plot()
   ss << "python " << SCRIPT_PATH << " data.yaml";
   system(ss.str().c_str());
 }
-}
+} // namespace arpro
