@@ -62,10 +62,14 @@ void arpro::Robot::rotateWheels(double _left, double _right)
 // move robot with linear and angular velocities
 void arpro::Robot::moveVW(double v, double w)
 {
-    double vx = v * cos(pose_.theta);
+    /*double vx = v * cos(pose_.theta);
     double vy = v * sin(pose_.theta);
 
-    moveXYT(vx, vy, w);
+    moveXYT(vx, vy, w);*/
+
+    double wl=(v+b_*w)/r_;
+    double wr=(v-b_*w)/r_;
+    rotateWheels(wl,wr);
 }
 
 // try to go to a given x-y position
