@@ -35,3 +35,11 @@ int main(int argc, char **argv)
   // plot trajectory
   envir.plot();
 }
+
+/* Q1 : the target motion is defined in the envir class
+ * Q2 : It's the constructor of the Robot class, it constructs a new robot with the parameters
+ * passed as arguments. 
+ * You can't modify the parameters afterwards because you can't access them inside the class.
+ * Q4 : To make it impossible to use outside the Robot class, we can put the method as protected or private.
+ * Private will provent any other class from accessing the method.
+ * Protected will provent any other class that aren't children to the Robot class to access it.
