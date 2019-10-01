@@ -18,6 +18,10 @@ int main(int argc, char **argv)
 
   // init robot at (0,0,0)
   arpro::Robot robot("BB8", 0, 0, 0);
+  arpro::Robot robotFollower("Follower", 0, 0, 0);
+
+
+
   envir.addRobot(robot);
 
   // simulate 100 sec

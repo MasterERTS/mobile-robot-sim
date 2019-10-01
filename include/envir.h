@@ -12,6 +12,7 @@ class Robot;
 class Environment
 {
 
+public:
   std::vector<Pose> walls;
   Pose target_;
   std::vector<double> x_hist, y_hist;
@@ -20,7 +21,6 @@ class Environment
   double dt = 0.1;
   double t = 0;
 
-public:
   Environment();
 
   double time() const
