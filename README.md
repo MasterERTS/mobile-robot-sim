@@ -1,4 +1,4 @@
-# arpro-mobro
+# Mobile Robot
 Develop an elementary simulator for a differential ground robot
 
 # Run
