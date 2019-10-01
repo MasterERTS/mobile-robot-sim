@@ -43,3 +43,4 @@ int main(int argc, char **argv)
  * Q4 : To make it impossible to use outside the Robot class, we can put the method as protected or private.
  * Private will provent any other class from accessing the method.
  * Protected will provent any other class that aren't children to the Robot class to access it.
+ */
