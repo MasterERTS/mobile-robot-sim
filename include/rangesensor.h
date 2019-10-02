@@ -11,7 +11,7 @@ public:
     {                                                                                                // the RangeSensor constructor does nothing more
     }
 
-    virtual void checkTwist(Twist &_t)
+    virtual void correctTwist(Twist &_t)
     {
         if (_t.vx > 0.1 * (s_ - 0.1))
         {

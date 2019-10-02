@@ -8,8 +8,6 @@
 #include <sensorbearing.h>
 #include <rangesensor.h>
 
-using namespace std;
-
 int main(int argc, char **argv)
 {
 
@@ -20,12 +18,13 @@ int main(int argc, char **argv)
 
   // init robot at (0,0,0)
   arpro::Robot robot("BB8", 0, 0, 0);
-  arpro::Robot robotFollower("Follower", 0, 0, 0);
+  arpro::Robot robotFollower("Follower", 1, 0, 0);
 
   arpro::RangeSensor rg1(robot, 0.1, 0, 0);
   arpro::RangeSensor rg2(robot, 0, 0.1, 0);
   arpro::RangeSensor rg3(robot, -0.1, 0, 0);
   arpro::RangeSensor rg4(robot, 0, -0.1, 0);
+
 
   robot.initWheels(0.3, 0.07, 10);
   robotFollower.initWheels(0.3, 0.05, 10);
@@ -39,7 +38,6 @@ int main(int argc, char **argv)
   while (envir.time() < 100)
   {
     cout << "---------------------" << endl;
-
     robotFollower.moveWithSensor(arpro::Twist(0.4, 0, 0));
 
     // update target position

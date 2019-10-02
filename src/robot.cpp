@@ -20,7 +20,7 @@ arpro::Robot::Robot(std::string _name, double _x, double _y, double _theta)
     y_history_.push_back(_y);
 
     // default sampling time: 1/100 s
-    dt_ = .01;
+    dt_ = 0.1;
     wheels_init_ = false;
 }
 
@@ -67,9 +67,9 @@ void arpro::Robot::moveVW(double v, double w)
 
     moveXYT(vx, vy, w);*/
 
-    double wl=(v+b_*w)/r_;
-    double wr=(v-b_*w)/r_;
-    rotateWheels(wl,wr);
+    double wl = (v + b_ * w) / r_;
+    double wr = (v - b_ * w) / r_;
+    rotateWheels(wl, wr);
 }
 
 // try to go to a given x-y position
