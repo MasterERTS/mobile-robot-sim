@@ -21,26 +21,26 @@ int main(int argc, char **argv)
 
   // init robot at (0,0,0)
   Robot robot("BB8", 0, 0, 0);
-  //Robot robotFollower("Follower", 0, 0, 0);
+  Robot robotFollower("Follower", 0, 0, 0);
 
   RangeSensor rg1(robot, 0.1, 0, 0);
   RangeSensor rg2(robot, 0, 0.1, 0);
   RangeSensor rg3(robot, -0.1, 0, 0);
   RangeSensor rg4(robot, 0, -0.1, 0);
 
-  //SensorBearing sb1(robotFollower, 0.1, 0, 0);
+  SensorBearing sb1(robotFollower, 0.1, 0, 0);
 
   robot.initWheels(0.3, 0.07, 10);
-  // robotFollower.initWheels(0.3, 0.07, 10);
+  robotFollower.initWheels(0.3, 0.07, 10);
 
   envir.addRobot(robot);
-  // envir.addRobot(robotFollower);
+  envir.addRobot(robotFollower);
 
   // simulate 100 sec
   while (envir.time() < 100)
   {
     cout << "---------------------" << endl;
-    // robotFollower.moveWithSensor(Twist(0.4, 0, 0));
+    robotFollower.moveWithSensor(Twist(0.4, 0, 0));
 
     // update target position
     envir.updateTarget();
