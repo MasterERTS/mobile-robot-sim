@@ -50,3 +50,5 @@ CMakeFiles
 
 .vscode
 
+build/*
+

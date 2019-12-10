@@ -7,7 +7,7 @@ In working directory :
 ```
 cmake .
 make
-./move_robot
+./build/move_robot
 ```
 
 You should get a buggy trajectory that goes through walls : to be fixed

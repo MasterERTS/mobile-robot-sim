@@ -9,7 +9,7 @@ include_directories(include)
 add_definitions(-DSCRIPT_PATH="${CMAKE_CURRENT_SOURCE_DIR}/src/plot.py")
 
 # Robot library
-add_library(lab2 SHARED src/robot.cpp include/robot.h include/geom.h
+add_library(move_robot_lib SHARED src/robot.cpp include/robot.h include/geom.h
                         include/envir.h src/envir.cpp
                         include/sensorbearing.h
                         include/rangesensor.h
@@ -18,4 +18,4 @@ add_library(lab2 SHARED src/robot.cpp include/robot.h include/geom.h
 # Lab 3: using the robot class
 # Lab 4: sensors on robot
 add_executable(move_robot src/main.cpp)
-target_link_libraries(move_robot lab2)
+target_link_libraries(move_robot move_robot_lib)

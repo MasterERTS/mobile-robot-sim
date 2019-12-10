@@ -5,9 +5,12 @@
 #include <robot.h>
 #include <sensor.h>
 
-arpro::Environment *arpro::Sensor::envir_ = nullptr;
+using namespace arpro;
+using namespace std;
 
-arpro::Robot::Robot(std::string _name, double _x, double _y, double _theta)
+Environment *Sensor::envir_ = nullptr;
+
+Robot::Robot(std::string _name, double _x, double _y, double _theta)
 {
     pose_.x = _x;
     pose_.y = _y;
@@ -20,11 +23,11 @@ arpro::Robot::Robot(std::string _name, double _x, double _y, double _theta)
     y_history_.push_back(_y);
 
     // default sampling time: 1/100 s
-    dt_ = 0.1;
+    dt_ = .01;
     wheels_init_ = false;
 }
 
-void arpro::Robot::moveXYT(double _vx, double _vy, double _omega)
+void Robot::moveXYT(double _vx, double _vy, double _omega)
 {
     // update position
     pose_.x += _vx * dt_;
@@ -36,7 +39,7 @@ void arpro::Robot::moveXYT(double _vx, double _vy, double _omega)
     y_history_.push_back(pose_.y);
 }
 
-void arpro::Robot::rotateWheels(double _left, double _right)
+void Robot::rotateWheels(double _left, double _right)
 {
     // to fill up after defining an initWheel method
     if (wheels_init_)
@@ -60,7 +63,7 @@ void arpro::Robot::rotateWheels(double _left, double _right)
 }
 
 // move robot with linear and angular velocities
-void arpro::Robot::moveVW(double v, double w)
+void Robot::moveVW(double v, double w)
 {
     /*double vx = v * cos(pose_.theta);
     double vy = v * sin(pose_.theta);
@@ -73,7 +76,7 @@ void arpro::Robot::moveVW(double v, double w)
 }
 
 // try to go to a given x-y position
-void arpro::Robot::goTo(const Pose &_p)
+void Robot::goTo(const Pose &_p)
 {
     // error in robot frame
     Pose error = _p.transformInverse(pose_);
@@ -82,7 +85,7 @@ void arpro::Robot::goTo(const Pose &_p)
     moveWithSensor(Twist(error.x, error.y, 0));
 }
 
-void arpro::Robot::moveWithSensor(Twist _twist)
+void Robot::moveWithSensor(Twist _twist)
 {
     // to fill up, sensor measurement and twist correcting
 
@@ -99,7 +102,7 @@ void arpro::Robot::moveWithSensor(Twist _twist)
     moveVW(_twist.vx, 20 * _twist.vy + _twist.w);
 }
 
-void arpro::Robot::initWheels(double b, double r, double wmax)
+void Robot::initWheels(double b, double r, double wmax)
 {
     b_ = b;
     r_ = r;
@@ -107,7 +110,7 @@ void arpro::Robot::initWheels(double b, double r, double wmax)
     wheels_init_ = true;
 }
 
-void arpro::Robot::printPosition()
+void Robot::printPosition()
 {
     std::cout << "Current position: " << pose_.x << ", " << pose_.y << std::endl;
 }

@@ -18,7 +18,7 @@ public:
   std::vector<double> x_hist, y_hist;
   std::vector<Robot *> robots_;
 
-  double dt = 0.1;
+  double dt = 0.01;
   double t = 0;
 
   Environment();

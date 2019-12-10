@@ -28,20 +28,16 @@ public:
             p1 = envir_->walls[i];
             p2 = envir_->walls[(i + 1) % envir_->walls.size()];
             // do whatever you want to do with points p1 and p2
-            double num = p1.x * p2.y - p1.x * _p.y - p2.x * p1.y + p2.x * _p.y + _p.x * p1.y - _p.x * p2.y;
-            double den = p1.x * sin(_p.theta) - p2.x * sin(_p.theta) - p1.y * cos(_p.theta) + p2.y * cos(_p.theta);
+            double num = p1.x*p2.y - p1.x*_p.y - p2.x*p1.y + p2.x*_p.y + _p.x*p1.y - _p.x*p2.y;
+            double den = p1.x*sin(_p.theta) - p2.x*sin(_p.theta) - p1.y*cos(_p.theta) + p2.y*cos(_p.theta);
             if (den == 0)
             {
                 d[i] = 20;
-            }
-            else
-            {
+            } else {
                 if (num * den < 0)
                 {
                     d[i] = 20;
-                }
-                else
-                {
+                } else {
                     d[i] = num / den;
                 }
             }
